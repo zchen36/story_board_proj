@@ -11,7 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150225021124) do
+ActiveRecord::Schema.define(version: 20150226040806) do
+
+  create_table "microposts", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
+  add_index "microposts", ["user_id"], name: "index_microposts_on_user_id"
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "stories", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "point"
+    t.integer  "stage"
+    t.integer  "project_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "stories", ["project_id"], name: "index_stories_on_project_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -20,8 +49,12 @@ ActiveRecord::Schema.define(version: 20150225021124) do
     t.datetime "updated_at",                      null: false
     t.string   "password_digest"
     t.boolean  "admin",           default: false
+    t.integer  "story_id"
+    t.integer  "project_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["project_id"], name: "index_users_on_project_id"
+  add_index "users", ["story_id"], name: "index_users_on_story_id"
 
 end
