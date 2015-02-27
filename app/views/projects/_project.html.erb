@@ -1,0 +1,7 @@
+<li id="project-<%= project.id %>">
+  <%= link_to project.title, project %>
+  <span class="content"><%= project.description %></span>
+  <span class="timestamp">
+    Added <%= time_ago_in_words(project.created_at) %> ago.
+  </span>
+</li>

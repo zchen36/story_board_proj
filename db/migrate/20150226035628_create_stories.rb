@@ -5,7 +5,7 @@ class CreateStories < ActiveRecord::Migration
       t.text :description
       t.integer :point
       t.integer :stage
-      t.references :project, index: true
+      t.references :projects, index: true
 
       t.timestamps null: false
     end
