@@ -5,7 +5,7 @@
   <% @projects.each do |project| %>
       <li>
         <%= link_to project.title, project %>
-        <%= link_to "update", project, edit_project_path%>
+        <%= link_to "update", edit_project_path(project)%>
         <% if current_user.admin?%>
             | <%= link_to "delete", project, method: :delete,
                           data: {confirm: "You sure?"} %>
