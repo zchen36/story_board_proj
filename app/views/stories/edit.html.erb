@@ -1,0 +1,32 @@
+<% provide(:title, "Edit story") %>
+<h1>Update your profile</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@story) do |f| %>
+        <%= render 'shared/error_messages' %>
+
+        <%= f.label :title %>
+        <%= f.text_field :title, class: 'form-control' %>
+
+        <%= f.label :description %>
+        <%= f.text_field :description, class: 'form-control' %>
+
+        <%= f.label :point %>
+        <%= f.text_field :point, class: 'form-control' %>
+
+        <%= f.label :stage %>
+        <%= f.text_field :stage, class: 'form-control' %>
+
+        <%= f.label :projects %>
+        <%= f.text_field :projects, class: 'form-control' %>
+
+        <%= f.submit "Save changes", class: "btn btn-primary" %>
+    <% end %>
+
+    <div class="gravatar_edit">
+      <%= gravatar_for @story %>
+      <a href="http://gravatar.com/emails" target=_blank>change</a>
+    </div>
+  </div>
+</div>
