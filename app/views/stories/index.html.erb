@@ -1,6 +1,7 @@
 <% provide(:title, 'All stories') %>
 <h1>All storys</h1>
 
+<<<<<<< HEAD
 <ul class="users">
   <% @stories.each do |story| %>
       <li>
@@ -8,6 +9,16 @@
         <%= link_to story.title, story %>
 
         <% if current_user.admin?%>
+=======
+<ul class="stories">
+  <% @stories.each do |story| %>
+      <li>
+        <%= gravatar_for story, size: 50 %>
+
+        <%= link_to story.title, story %>
+
+        <% if current_user.admin? && !current_user?(user) && !user.admin?%>
+>>>>>>> 33fc61c48db5b209a2ee0e600847b314156f98ae
             | <%= link_to "delete", story, method: :delete,
                           data: {confirm: "You sure?"} %>
         <% end %>
