@@ -14,11 +14,9 @@ Rails.application.routes.draw do
   resources :users
   resources :projects
   resources :stories
-<<<<<<< HEAD
-=======
 
   #get '/'
->>>>>>> 33fc61c48db5b209a2ee0e600847b314156f98ae
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

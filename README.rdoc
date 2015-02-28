@@ -1,6 +1,7 @@
 == README
 
 Welcome to the Storyboards.
+http://desolate-coast-7304.herokuapp.com/
 
 Please use the following accounts to try the app:
 
@@ -9,7 +10,7 @@ login:    admin@test.com
 password: 123456
 
 Developer Account:
-login:    user@test.com
-password: user
+login:    dev1@test.com
+password: 123456
 
 <tt>rake doc:app</tt>.
