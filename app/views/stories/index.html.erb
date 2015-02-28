@@ -1,0 +1,61 @@
+<h1>Listing stories</h1>
+<p><b>search for projects:</b></p>
+<%=form_for :story, url: search_path(@project) do |f|%>
+<p><%=f.label :title%></p><p><%=f.text_field :title%></p>
+<p><%=f.label :description%></p><p><%=f.text_field :description%></p>
+<%=f.submit 'search' %>
+<%end%>
+<p></p>
+<% @stories.each do |story| %>
+    <p>
+      <li>Title:</li>
+      <%= story.title %>
+    </p>
+
+    <p>
+      <li>Description:</li>
+      <%= story.description %>
+    </p>
+
+    <p>
+      <li>Point:</li>
+      <%= story.point %>
+    </p>
+
+    <p>
+      <li>Stage:</li>
+      <%= story.stage %>
+    </p>
+
+    <p>
+      <li>Developer:</li>
+      <% story.users.each do |u| %>
+        <p>Name:<%= u.name %></p>
+        <p>Email:<%= u.email %></p>
+    <% end %>
+    </p>
+    <p>
+      <% if current_user&&!current_user.admin? && @project.id == current_user.project_id &&current_user.story_id ==nil&& story.users.count<2 %>
+
+          <%= link_to 'SignUp' ,project_story_path(@project, story)%>
+      <% end %>
+      <% if current_user&&!current_user.admin? && @project.id == current_user.project_id &&current_user.story_id ==nil&& story.users.count==2 %>
+          <%= link_to 'Replace', project_story_path(@project, story)%>
+      <% end %>
+      <% if current_user&& !current_user.admin? && @project.id == current_user.project_id %>
+          <%= link_to 'Edit', edit_project_story_path(@project, story)%>
+      <% end %>
+
+      <% if current_user&& !current_user.admin? && @project.id ==current_user.project_id && story.id == current_user.story_id%>
+        <%= link_to 'SignOff', signoff_path(@project,story) %>
+      <% end %>
+      <% if current_user&&!current_user.admin? && @project.id == current_user.project_id %>
+          <%= link_to 'DestroyStory',[story.project,story],method: :delete, data:{confirm: 'are you sure?'}%>
+      <% end%>
+    </p>
+    <p>---------------------------</p>
+<% end %>
+<% if current_user&& !current_user.admin? && @project.id == current_user.project_id %>
+<%= render 'form' %>
+<% end %>
+<%= link_to 'Back', @project%>

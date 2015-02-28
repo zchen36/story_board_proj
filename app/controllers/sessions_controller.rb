@@ -9,11 +9,6 @@ class SessionsController < ApplicationController
       # Log the user in and redirect to the user's show page.
       log_in user
       #flash[:success] = 'You are logged in as an admin!'
-      if user.admin
-        flash[:success] = 'You are logged in as an admin!'
-      else
-        flash[:danger] = 'You are logged in as a developer!'
-      end
       redirect_to user
     else
       # Create an error message.

@@ -1,0 +1,46 @@
+<h1>Editing story</h1>
+<p>
+  <li>Title:</li>
+  <%= @story.title %>
+</p>
+
+<p>
+  <li>Description:</li>
+  <%= @story.description %>
+</p>
+
+<p>
+  <li>Point:</li>
+  <%= @story.point %>
+</p>
+
+<p>
+  <li>Stage:</li>
+  <%= @story.stage %>
+</p>
+<%= form_for @story, url: project_story_path(@project,@story),  method: :patch do |p| %>
+
+    <p>
+      <%= p.label :title %><br>
+      <%= p.text_field :title %>
+    </p>
+
+    <p>
+      <%= p.label :description %><br>
+      <%= p.text_area :description %>
+    </p>
+    <p>
+      <%= p.label :point %><br>
+      <%= p.text_field :point %>
+    </p>
+    <p>
+      <%= p.label :stage %><br>
+      <%= p.select(:stage,[['Analysis', 'Analysis'],['Ready For Dev','Ready For Dev'], ['In Dev', 'In Dev'],['Dev Complete','Dev Complete'],['In Test','In Test'],['Complete','Complete']]) %>
+    </p>
+    <p>
+      <%= p.submit 'update'%>
+    </p>
+
+<% end %>
+
+<%= link_to 'Back', project_stories_path(@project) %>

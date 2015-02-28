@@ -12,23 +12,31 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
-      # Handle a successful save.
-      flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user
+    @test =0
+    User.all.each do |u|
+      if u.email == params[:user][:email]
+        @test =1
+      end
+    end
+    if @test ==0
+      @user=User.new(user_params)
+      @user.admin=true  if params[:admin]=="true"
+      if @user.save
+        UserMailer.welcome(@user).deliver_now
+        flash[:success]="Successful created!"
+        redirect_to root_path
+      else
+        render 'new'
+      end
     else
+      @user= User.new
+      flash[:danger]="this email already registered!"
       render 'new'
     end
   end
 
   def edit
     @user = User.find(params[:id])
-  end
-
-  def correct_user
-    @user=User.find(params[:id])
-    redirect_to(current_user) unless current_user?(@user)
   end
 
   def update
@@ -66,4 +74,10 @@ class UsersController < ApplicationController
       redirect_to login_url
     end
   end
+
+  def correct_user
+    @user=User.find(params[:id])
+    redirect_to(current_user) unless current_user?(@user)
+  end
+
 end

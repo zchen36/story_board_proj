@@ -1,0 +1,38 @@
+<h1>replace</h1>
+
+<p>
+  <li>Title:</li>
+  <%= @story.title %>
+</p>
+
+<p>
+  <li>Description:</li>
+  <%= @story.description %>
+</p>
+
+<p>
+  <li>Point:</li>
+  <%= @story.point %>
+</p>
+
+<p>
+  <li>Stage:</li>
+  <%= @story.stage %>
+</p>
+<p>-------------------------</p>
+
+<%= form_for :user, url:project_story_path(@project,@story) do |f| %>
+    <p><%=f.label :name%><%= ": "+@story.users[0].name %></p>
+    <p><%=f.label :email%><%= ": "+@story.users[0].email %></p>
+        <%=f.hidden_field :id,:value =>@story.users[0].id%>
+    <%= f.submit 'replace'%>
+    <p></p>
+<% end %>
+
+<%= form_for :user, url:project_story_path(@project,@story) do |f| %>
+    <p><%=f.label :name%><%= ": "+@story.users[1].name %></p>
+    <p><%=f.label :email%><%= ": "+@story.users[1].email %></p>
+    <%=f.hidden_field :id,:value =>@story.users[1].id%>
+    <%= f.submit 'replace'%>
+    <p></p>
+<% end %>

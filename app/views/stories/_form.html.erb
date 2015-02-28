@@ -1,0 +1,22 @@
+<%= form_for([@project, @project.stories.build]) do |p| %>
+    <p>
+      <%= p.label :title %><br>
+      <%= p.text_field :title %>
+    </p>
+    <p>
+      <%= p.label :description %><br>
+      <%= p.text_area :description %>
+    </p>
+    <p>
+      <%= p.label :point %><br>
+      <%= p.text_field :point %>
+    </p>
+    <p>
+      <%= p.label :stage %><br>
+      <%= p.select(:stage,[['Analysis', 'Analysis'],['Ready For Dev','Ready For Dev'], ['In Dev', 'In Dev'],['Dev Complete','Dev Complete'],['In Test','In Test'],['Complete','Complete']]) %>
+    </p>
+
+    <p>
+      <%= p.submit %>
+    </p>
+<% end %>

@@ -1,14 +1,63 @@
-<%= @user.name %>, <%= @user.email %>
-<div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
-    </section>
-  </aside>
-  <%= link_to "Add new admin/developer", signup_path, class: "btn btn-lg btn-primary" %>
-  <%= link_to "Delete developer", users_path, class: "btn btn-lg btn-primary" %>
-  <%= link_to "Add projects", new_project_path, class: "btn btn-lg btn-primary" %>
-</div>
+<% provide(:title, 'Profile') %>
+<h1>User Profile</h1>
+<p>
+  <b>Name:</b><br>
+  <%= @user.name %><br>
+  <b>Email:</b><br>
+  <%= @user.email %><br>
+  <b>Role:</b><br>
+  <% if@user.admin %>
+      Administer
+  <%else%>
+      Developer
+  <%end%>
+</p>
+<p>----------------</p>
+<% if Story.find_by( createdby: current_user.id)!=nil%>
+    <p><strong>created stories</strong></p>
+    <% Story.where(:createdby => current_user.id).each do |s|%>
+        <p><strong>Project:</strong></p>
+        <p>Title:<%=s.project.title%></p>
+        <p>Description:<%=s.project.description%></p>
+        <p><strong>Story:</strong></p>
+        <p>Title:<%=s.title%></p>
+        <p>Description:<%=s.description%></p>
+        <p>Point:<%=s.point%></p>
+        <p>Stage:<%=s.stage%></p>
+        <p>
+          Developer:
+          <% s.users.each do |u| %>
+            <p>Name:<%= u.name %></p>
+            <p>Email:<%= u.email %></p>
+        <% end %>
+        </p>
+        <p>----------------</p>
+    <%end%>
+<%end%>
+<% if current_user.story_id!=nil%>
+    <p><b>signed story</b></p>
+    <p><strong>Project:</strong></p>
+    <p>Title:<%=Project.find(current_user.project_id).title%></p>
+    <p>Description:<%=Project.find(current_user.project_id).description%></p>
+    <p><strong>Story:</strong></p>
+    <p>Title:<%=Story.find(current_user.story_id).title%></p>
+    <p>Description:<%=Story.find(current_user.story_id).description%></p>
+    <p>Point:<%=Story.find(current_user.story_id).point%></p>
+    <p>Stage:<%=Story.find(current_user.story_id).stage%></p>
+    <p>
+      Developer:
+      <% Story.find(current_user.story_id).users.each do |u| %>
+        <p>Name:<%= u.name %></p>
+        <p>Email:<%= u.email %></p>
+    <% end %>
+    </p>
+    <%= link_to 'Edit', edit_project_story_path(Project.find(current_user.project_id), Story.find(current_user.story_id))%>
+    <%= link_to 'DestroyStory',[Project.find(current_user.project_id),Story.find(current_user.story_id)],method: :delete, data:{confirm: 'are you sure?'}%>
+    <p>----------------</p>
+<%end%>
+<%= link_to "show all projects", projects_path %>
+<% if current_user.admin? && current_user?(@user)%>
+    <div><%= link_to "add people", signup_path %></div>
+
+
+<%end%>

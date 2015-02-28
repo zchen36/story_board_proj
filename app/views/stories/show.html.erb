@@ -1,0 +1,29 @@
+<p>
+  <li>Title:</li>
+  <%= @story.title %>
+</p>
+
+<p>
+  <li>Description:</li>
+  <%= @story.description %>
+</p>
+
+<p>
+  <li>Point:</li>
+  <%= @story.point %>
+</p>
+
+<p>
+  <li>Stage:</li>
+  <%= @story.stage %>
+</p>
+<p>
+  <li>Developer:</li>
+  <% @story.users.each do |u| %>
+    <p>Name:<%= u.name %></p>
+    <p>Email:<%= u.email %></p>
+<% end %>
+</p>
+<p>
+  <%= link_to 'Back', project_stories_path(@project)%>
+</p>
