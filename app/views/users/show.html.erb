@@ -8,12 +8,14 @@
       </h1>
     </section>
   </aside>
-  <br>
-  <%= link_to "Add new admin/developer", signup_path, class: "btn btn-lg btn-primary" %>
-  <br>
-  <%= link_to "Delete developer", users_path, class: "btn btn-lg btn-primary" %>
-  <br>
-  <%= link_to "Add projects", new_project_path, class: "btn btn-lg btn-primary" %>
-  <br>
-  <%= link_to "Delete projects", projects_path, class: "btn btn-lg btn-primary" %>
+  <% if current_user.admin? %>
+      <br>
+      <%= link_to "Add new admin/developer", signup_path, class: "btn btn-lg btn-primary" %>
+      <br>
+      <%= link_to "Delete developer", users_path, class: "btn btn-lg btn-primary" %>
+      <br>
+      <%= link_to "Add projects", new_project_path, class: "btn btn-lg btn-primary" %>
+      <br>
+      <%= link_to "Delete projects", projects_path, class: "btn btn-lg btn-primary" %>
+  <% end %>
 </div>
