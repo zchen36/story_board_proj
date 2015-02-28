@@ -1,1 +1,15 @@
-<%= render @projects %>
+<% provide(:title, 'All projects') %>
+<h1>All projects</h1>
+
+<ul class="users">
+  <% @projects.each do |project| %>
+      <li>
+        <%= link_to project.title, project %>
+        <%= link_to "update", project, edit_project_path%>
+        <% if current_user.admin?%>
+            | <%= link_to "delete", project, method: :delete,
+                          data: {confirm: "You sure?"} %>
+        <% end %>
+      </li>
+  <% end %>
+</ul>
