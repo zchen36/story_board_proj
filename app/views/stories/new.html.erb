@@ -1,0 +1,25 @@
+<% provide(:title, 'Create Story') %>
+<h1>Create Story</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@story) do |f| %>
+        
+        <%= f.label :title %>
+        <%= f.text_field :title, class: 'form-control' %>
+
+        <%= f.label :description %>
+        <%= f.text_field :description, class: 'form-control' %>
+
+        <%= f.label :point %>
+        <%= f.text_field :point, class: 'form-control' %>
+
+        <%= f.label :stage %>
+        <%= f.text_field :stage, class: 'form-control' %>
+
+        <%= f.submit "Save changes", class: "btn btn-primary" %>
+
+        <%= f.submit "Create new story", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

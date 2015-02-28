@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
 
-  root             'static_page#home'
+  get 'story/index'
+
+  root 'static_page#home'
   get 'help'    => 'static_page#help'
   get 'about'   => 'static_page#about'
   get 'contact' => 'static_page#contact'
@@ -11,6 +13,9 @@ Rails.application.routes.draw do
   delete 'logout'  => 'sessions#destroy'
   resources :users
   resources :projects
+  resources :stories
+
+  #get '/'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
